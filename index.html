@@ -45,9 +45,8 @@
         async function main(){
           let pyodide = await loadPyodide();
           await pyodide.loadPackage(["pygame-ce"], { checkIntegrity: false })
-          await pyodide.loadPackage(["Bal"], { checkIntegrity: false })
-          await pyodide.loadPackage(["Figuur"], { checkIntegrity: false })
-          await pyodide.loadPackage(["pygame-ce"], { checkIntegrity: false })
+          await pyodide.loadPackage(["pygame_gui"], { checkIntegrity: false })
+
 
           canvas = document.getElementById("canvas");
           pyodide.canvas.setCanvas2D(canvas);

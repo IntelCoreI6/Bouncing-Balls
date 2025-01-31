@@ -39,7 +39,7 @@ class Speelkader:
         self.max = maximum
         self.highscore = 0
         self.geschiedenis = []
-        self.speed = 12
+        self.speed = 8
         self.moeilijk = False
     def ballenmaker(self):
         self.ballenlijst = []
@@ -131,7 +131,7 @@ timer = Timer(9)
 game_state = "menu"  # Possible states: "menu", "running", "game_over"
 
 pygame.init()
-pygame.display.set_caption ("Botsende ballen")
+pygame.display.set_caption ("Bouncy Balls")
 scherm = pygame.display.set_mode(afmetingen)
 clock = pygame.time.Clock()
 speelkader.ballenmaker()
@@ -190,7 +190,7 @@ def main():
         game_state = "game_over"
 
 def menu():
-    teken_tekst("Bouncing Balls", 70, rood, breedte_scherm // 2 - 250, hoogte_scherm // 2 -230, title_font)
+    teken_tekst("Bouncing Balls", 70, rood, breedte_scherm // 2 - 250, hoogte_scherm // 2 -230)
     teken_tekst("Press Enter to Start the Game", 40, grijs, breedte_scherm // 2 - 250, hoogte_scherm // 2-130)
     teken_tekst(f"Highscore: {speelkader.highscore}", 40, rood, breedte_scherm // 2 - 250, hoogte_scherm // 2 -95)
     teken_tekst(f"Ball Speed: {speelkader.speed}", 30, zwart, breedte_scherm // 2 - 250, hoogte_scherm // 2 - 60)
@@ -207,14 +207,12 @@ def menu():
 
 def game_over():
     score = speelkader.aantal - len(speelkader.ballenlijst)
-    teken_tekst("Game Over", 100, rood, breedte_scherm // 2 - 250, hoogte_scherm // 2 - 150, title_font)
+    teken_tekst("Game Over", 100, rood, breedte_scherm // 2 - 250, hoogte_scherm // 2 - 150)
     teken_tekst("Press Enter to Restart", 50, rood, breedte_scherm // 2 - 250, hoogte_scherm // 2 - 50)
     teken_tekst(f"Final Score: {score}", 50, rood, breedte_scherm // 2 - 250, hoogte_scherm // 2 + 50)
     speelkader.geschiedenis.append(score)
     if score > speelkader.highscore:
         speelkader.highscore = score
-
-
 
 while True:
     time_delta = clock.tick(30) / 1000.0

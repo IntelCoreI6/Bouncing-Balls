@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='utf8'?>
+<nuitka-compilation-report nuitka_version="2.6.3" nuitka_commercial_version="not installed" completion="error exit message (1)" exit_message="Failed unexpectedly in Scons C backend compilation.">
+  <module name="__main__" kind="PythonMainModule" usage="root_module" reason="Root module" source_path="${cwd}\main.py">
+    <optimization-time pass="1" time="0.21" />
+    <optimization-time pass="2" time="0.02" />
+    <module_usages>
+      <module_usage name="site" finding="excluded" line="1" exclusion_reason="Not following into stdlib unless standalone or requested to follow into stdlib." />
+      <module_usage name="pygame" finding="absolute" line="1" />
+      <module_usage name="sys" finding="absolute" line="1" />
+      <module_usage name="time" finding="absolute" line="1" />
+      <module_usage name="pygame.locals" finding="absolute" line="2" />
+      <module_usage name="asyncio" finding="excluded" line="3" exclusion_reason="Not following into stdlib unless standalone or requested to follow into stdlib." />
+      <module_usage name="pygame_gui" finding="absolute" line="4" />
+      <module_usage name="pygame_gui.elements" finding="absolute" line="5" />
+      <module_usage name="time" finding="absolute" line="6" />
+      <module_usage name="random" finding="excluded" line="7" exclusion_reason="Not following into stdlib unless standalone or requested to follow into stdlib." />
+      <module_usage name="math" finding="absolute" line="8" />
+    </module_usages>
+  </module>
+  <performance>
+    <memory_usage name="after_launch" value="43868160" />
+    <memory_usage name="before_c_code_generation" value="46227456" />
+    <memory_usage name="before_running_scons" value="50458624" />
+  </performance>
+  <data_composer blob_size="3772" total="320">
+    <module_data filename="__bytecode.const" input_size="0" blob_name=".bytecode" blob_size="3" />
+    <module_data filename="__constants.const" input_size="2175" blob_name="" blob_size="964" />
+    <module_data filename="module.__main__.const" input_size="5062" blob_name="__main__" blob_size="2765" />
+  </data_composer>
+  <command_line>
+    <option value="main.py" />
+    <option value="-o" />
+    <option value="game.wasm" />
+  </command_line>
+  <plugins>
+    <plugin name="anti-bloat" user_enabled="no" />
+    <plugin name="eventlet" user_enabled="no" />
+    <plugin name="gi" user_enabled="no" />
+    <plugin name="implicit-imports" user_enabled="no" />
+    <plugin name="multiprocessing" user_enabled="no" />
+    <plugin name="options-nanny" user_enabled="no" />
+    <plugin name="pkg-resources" user_enabled="no" />
+    <plugin name="transformers" user_enabled="no" />
+  </plugins>
+  <distributions />
+  <python python_exe="${sys.prefix}\Scripts\python.exe" python_flavor="Unknown" python_version="3.11.3" os_name="Windows" arch_name="x86_64">
+    <search_path>
+      <path value="${cwd}" />
+      <path value="~\AppData\Local\Programs\Python\Python311\DLLs" />
+      <path value="~\AppData\Local\Programs\Python\Python311\Lib" />
+      <path value="~\AppData\Local\Programs\Python\Python311" />
+      <path value="${sys.prefix}" />
+      <path value="${sys.prefix}\Lib\site-packages" />
+    </search_path>
+  </python>
+  <output run_filename="${cwd}\main.cmd" />
+</nuitka-compilation-report>
