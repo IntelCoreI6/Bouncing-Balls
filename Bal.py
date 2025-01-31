@@ -9,7 +9,6 @@ class Bal(Figuur):
         self.bew_ver = bew_ver
     def geraakt(self, coo):
         if sqrt((coo[0]-self.cox)**2 + (coo[1]- self.coy)**2) <= self.straal:
-            print("geraakt")
             return True
         else:
             return False

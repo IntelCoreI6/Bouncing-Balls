@@ -8,16 +8,28 @@ class Speelkader:
         self.aantal = aantal
         self.min = minimum
         self.max = maximum
+        self.highscore = 0
+        self.geschiedenis = []
+        self.speed = 7
+        self.moeilijk = False
     def ballenmaker(self):
         self.ballenlijst = []
         for _ in range(self.aantal):
             straal = randint(self.min, self.max)
             kleur = choice(kleuren)
-            bal = Bal(randint(straal, self.breedte-straal), randint(straal, self.hoogte-straal), kleur, straal, randint(-5, 5), randint(-5, 5))
+            bal = Bal(randint(straal, self.breedte-straal), randint(straal, self.hoogte-straal), kleur, straal, randint(-self.speed, self.speed), randint(-self.speed, self.speed))
             self.ballenlijst.append(bal)
     def bewegen(self):
         for bal in self.ballenlijst:
             bal.beweeg()
+            if self.moeilijk:
+                #bal.kleur = choice(kleuren)
+                bal.straal = randint(10 , bal.straal+10)
+                if randint(-1, 1) == 0:
+                    bal.bew_hor = bal.bew_ver*-1.02
+                elif randint(-1, 1) == 1:
+                    bal.bew_ver = bal.bew_hor*-1.02
+
     def geraakt(self, coo):
         geraakte = None
         for bal in self.ballenlijst:
