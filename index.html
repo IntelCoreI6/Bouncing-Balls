@@ -42,26 +42,48 @@
         const curloc = document.location.href;
         const curdir = curloc.substring(0, curloc.lastIndexOf('/'));
   
-        async function main(){
-          let pyodide = await loadPyodide();
-          await pyodide.loadPackage(["pygame-ce"], { checkIntegrity: false })
-          canvas = document.getElementById("canvas");
-          pyodide.canvas.setCanvas2D(canvas);
-          let href = window.location.href;
-          var link = href.substring(0, href.lastIndexOf('/')) + "/bounce.tar";
-          let zipResponse = await fetch(link);
-          let zipBinary = await zipResponse.arrayBuffer();
-          pyodide.unpackArchive(zipBinary, "tar", { extractDir: "/lib/python3.12/site-packages/Bouncing-Balls" });
-          pyodide.runPythonAsync(`
-import sys
-sys.path.append('/lib/python3.12/site-packages/bounce')
-import main
-main.main()
-`)
+        async function loadPythonFile(filename) {
+            const response = await fetch(filename);
+            const content = await response.text();
+            return content;
         }
-        main();
+
+        async function main() {
+            let pyodide = await loadPyodide();
+            await pyodide.loadPackage(["pygame-ce"], { checkIntegrity: false });
+            
+            // Set up canvas
+            let canvas = document.getElementById("canvas");
+            pyodide.canvas.setCanvas2D(canvas);
+            
+            try {
+                // Load all Python class files first
+                const figuurCode = await loadPythonFile('Figuur.py');
+                await pyodide.runPythonAsync(figuurCode);
+                
+                const balCode = await loadPythonFile('Bal.py');
+                await pyodide.runPythonAsync(balCode);
+                
+                const timerCode = await loadPythonFile('Timer.py');
+                await pyodide.runPythonAsync(timerCode);
+                
+                const speelkaderCode = await loadPythonFile('Speelkader.py');
+                await pyodide.runPythonAsync(speelkaderCode);
+                
+                // Finally load and run the main game file
+                const mainCode = await loadPythonFile('main.py');
+                await pyodide.runPythonAsync(mainCode);
+                
+            } catch (error) {
+                console.error("Error loading Python files:", error);
+            }
+        }
+        
+        main().catch((error) => {
+            console.error("Error loading Pyodide:", error);
+        });
       </script>
-<div class="demo-header">Bounce!</div>
+<div class="demo-header">Boucing Bouncing-Balls :D</div>
     <canvas id="canvas" style="width:fit-content; height:fit-content;"></canvas>
     Made by Sloebre
 </body>
