@@ -164,7 +164,7 @@ min_size_slider = pygame_gui.elements.UIHorizontalSlider(
 )
 
 max_size_slider = pygame_gui.elements.UIHorizontalSlider(
-    relative_rect=pygame.Rect((breedte_scherm // 2 - 250, hoogte_scherm // 2 + 850 + 25), (300, slider_height)),
+    relative_rect=pygame.Rect((breedte_scherm // 2 - 250, hoogte_scherm // 2 + 80 + 25), (300, slider_height)),
     start_value=speelkader.max,
     value_range=(5, 50),
     manager=manager
