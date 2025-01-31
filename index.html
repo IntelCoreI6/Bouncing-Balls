@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Sloebre</title>
+    <title>Bounce!</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,7 +20,7 @@
             overflow: hidden;
         }
         .demo-header {
-            background-color: #00d9ff;
+            background-color: #007bff;
             color: #fff;
             padding: 15px 20px;
             font-size: 20px;
@@ -41,59 +41,28 @@
     <script type="text/javascript">
         const curloc = document.location.href;
         const curdir = curloc.substring(0, curloc.lastIndexOf('/'));
-    
-        async function loadPythonFile(filename) {
-            const response = await fetch(filename);
-            const content = await response.text();
-            return content;
+  
+        async function main(){
+          let pyodide = await loadPyodide();
+          await pyodide.loadPackage(["pygame-ce"], { checkIntegrity: false })
+          canvas = document.getElementById("canvas");
+          pyodide.canvas.setCanvas2D(canvas);
+          let href = window.location.href;
+          var link = href.substring(0, href.lastIndexOf('/')) + "/Bouncing-Balls.tar";
+          let zipResponse = await fetch(link);
+          let zipBinary = await zipResponse.arrayBuffer();
+          pyodide.unpackArchive(zipBinary, "tar", { extractDir: "/lib/python3.12/site-packages/Bouncing-Balls" });
+          pyodide.runPythonAsync(`
+import sys
+sys.path.append('/lib/python3.12/site-packages/Bouncing-Balls')
+import main
+main.main()
+`)
         }
-    
-        async function main() {
-            let pyodide = await loadPyodide();
-            await pyodide.loadPackage(["pygame-ce"], { checkIntegrity: false });
-            
-            let canvas = document.getElementById("canvas");
-            pyodide.canvas.setCanvas2D(canvas);
-            
-            try {
-                // Create package structure and load modules
-                await pyodide.runPythonAsync(`
-                    import sys
-                    import os
-                    
-                    # Create package directory
-                    if not 'game' in sys.modules:
-                        sys.modules['game'] = type('module', (), {})()
-                `);
-    
-                // Load module files into package
-                const moduleFiles = {
-                    'game.figuur': 'Figuur.py',
-                    'game.bal': 'Bal.py', 
-                    'game.timer': 'Timer.py',
-                    'game.speelkader': 'Speelkader.py'
-                };
-    
-                for (const [moduleName, filename] of Object.entries(moduleFiles)) {
-                    const code = await loadPythonFile(filename);
-                    await pyodide.runPythonAsync(`
-                        exec('''${code}''', sys.modules['${moduleName}'].__dict__)
-                    `);
-                }
-    
-                // Run main with modules available
-                const mainCode = await loadPythonFile('main.py');
-                await pyodide.runPythonAsync(mainCode);
-                
-            } catch (error) {
-                console.error("Error loading Python files:", error);
-            }
-        }
-    
-        main().catch(console.error);
-    </script>
-<div class="demo-header">Boucing Bouncing-Balls :D</div>
+        main();
+      </script>
+<div class="demo-header">Bounce!</div>
     <canvas id="canvas" style="width:fit-content; height:fit-content;"></canvas>
-    Made by Sloebre
+    Made with <span style="color: #ff0000;">&#9829;</span> By Nano 
 </body>
 </html>
