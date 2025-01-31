@@ -1,8 +1,8 @@
 import pygame,sys,time
 from pygame.locals import *
-from Bal import Bal
-from Speelkader import Speelkader
-from Timer import Timer
+from game.bal import Bal
+from game.speelkader import Speelkader
+from game.timer import Timer
 def teken_tekst (tekst,lettergrootte,kleur,cox,coy,lettertype = None):
     ltype = pygame.font.Font (lettertype,lettergrootte) # bepaalt het lettertype en -grootte van je tekst, None betekent dat het standaard lettertype gebruikt wordt
     grafische_tekst = ltype.render (tekst,True,kleur) # render je tekst, zet het om in een grafische vorm
