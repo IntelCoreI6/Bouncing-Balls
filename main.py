@@ -1,13 +1,34 @@
 import pygame,sys,time
 from pygame.locals import *
-from Bal import Bal
 import asyncio
 import pygame_gui
 import pygame_gui.elements
 import time
 from random import randint, choice
+from math import sqrt
 
 kleuren = [[255,0,0], [0,0,0], [0,0,255], [0,255,0], [255,255,0]]
+
+class Figuur:
+    def __init__(self, cox, coy, kleur):
+        self.cox = cox
+        self.coy = coy
+        self.kleur = kleur
+
+class Bal(Figuur):
+    def __init__(self, cox, coy, kleur, straal, bew_hor, bew_ver):
+        super().__init__(cox, coy, kleur)
+        self.straal = straal
+        self.bew_hor = bew_hor
+        self.bew_ver = bew_ver
+    def geraakt(self, coo):
+        if sqrt((coo[0]-self.cox)**2 + (coo[1]- self.coy)**2) <= self.straal:
+            return True
+        else:
+            return False
+    def beweeg(self):
+        self.cox += self.bew_hor
+        self.coy += self.bew_ver
 
 class Speelkader:
     def __init__(self, breedte, hoogte, aantal, minimum, maximum):
@@ -18,7 +39,7 @@ class Speelkader:
         self.max = maximum
         self.highscore = 0
         self.geschiedenis = []
-        self.speed = 7
+        self.speed = 12
         self.moeilijk = False
     def ballenmaker(self):
         self.ballenlijst = []
@@ -76,8 +97,7 @@ def teken_tekst (tekst,lettergrootte,kleur,cox,coy,lettertype = None):
     coordinaat = [cox,coy] # coördinaat van de linkerbovenhoek van je tekst
     scherm.blit (grafische_tekst,coordinaat) # teken je tekst op het canvas
 
-# Load a nicer font for the game title
-title_font = "freesansbold.ttf"
+
 
 def teken_bal (bal):
     coordinaat = [bal.cox,bal.coy]
@@ -106,7 +126,7 @@ grijs = [128, 128, 128]
 zwart = [0,0,0]
 groen = [0, 255, 0]
 #bal = Bal(100, 100, rood, 16, 0.01, 0.01)
-speelkader = Speelkader(breedte_scherm, hoogte_scherm, 10, 10, 50)
+speelkader = Speelkader(breedte_scherm, hoogte_scherm, 15, 10, 40)
 timer = Timer(9)
 game_state = "menu"  # Possible states: "menu", "running", "game_over"
 
@@ -193,6 +213,8 @@ def game_over():
     speelkader.geschiedenis.append(score)
     if score > speelkader.highscore:
         speelkader.highscore = score
+
+
 
 while True:
     time_delta = clock.tick(30) / 1000.0
