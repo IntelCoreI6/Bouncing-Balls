@@ -8,8 +8,8 @@ The goal of the game is simple yet exciting: **click as many balls as possible w
 1. Clone the repo
 2. install the needed libraries
 ```
-  pip install pygame
-  pip install pygame_gui
+pip install pygame
+pip install pygame_gui
 ```
 4. Configure the settings to your liking, be sure to try out the Extreme difficulty option 👀.
 5. Start the game by pressing enter and watch the balls bounce around the screen.
