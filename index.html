@@ -20,7 +20,7 @@
             overflow: hidden;
         }
         .demo-header {
-            background-color: #007bff;
+            background-color: #00d9ff;
             color: #fff;
             padding: 15px 20px;
             font-size: 20px;
@@ -51,7 +51,7 @@
           var link = href.substring(0, href.lastIndexOf('/')) + "/bounce.tar";
           let zipResponse = await fetch(link);
           let zipBinary = await zipResponse.arrayBuffer();
-          pyodide.unpackArchive(zipBinary, "tar", { extractDir: "/lib/python3.12/site-packages/bounce" });
+          pyodide.unpackArchive(zipBinary, "tar", { extractDir: "/lib/python3.12/site-packages/Bouncing-Balls" });
           pyodide.runPythonAsync(`
 import sys
 sys.path.append('/lib/python3.12/site-packages/bounce')
@@ -63,6 +63,6 @@ main.main()
       </script>
 <div class="demo-header">Bounce!</div>
     <canvas id="canvas" style="width:fit-content; height:fit-content;"></canvas>
-    Made with <span style="color: #ff0000;">&#9829;</span> By Nano 
+    Made by Sloebre
 </body>
 </html>
