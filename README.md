@@ -1,5 +1,6 @@
 # Bouncy-Balls
 Welcome to **Bouncy Balls**! 🎉, a game made in pygame
+Made for High Seas 2025
 
 ## Game Objective
 The goal of the game is simple yet exciting: **click as many balls as possible within the given timeframe**. Test your reflexes and see how many points you can score!
