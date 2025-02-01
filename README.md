@@ -1,5 +1,5 @@
 # Bouncy-Balls
-Welcome to **Bouncy Balls**! 🎉, a game made in pygame
+Welcome to **Bouncy Balls**! 🎉, a game made in pygame.
 Made for High Seas 2025
 
 ## Game Objective
