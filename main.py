@@ -55,9 +55,9 @@ class Speelkader:
                 #bal.kleur = choice(kleuren)
                 bal.straal = randint(10 , bal.straal+10)
                 if randint(-1, 1) == 0:
-                    bal.bew_hor = bal.bew_ver*-1.02
+                    bal.bew_hor = bal.bew_ver*1.025
                 elif randint(-1, 1) == 1:
-                    bal.bew_ver = bal.bew_hor*-1.02
+                    bal.bew_ver = bal.bew_hor*1.025
 
     def geraakt(self, coo):
         geraakte = None
